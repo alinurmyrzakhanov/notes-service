@@ -33,26 +33,32 @@ Cервис на Go для управления заметками с REST API, 
 4. Приложение будет доступно по адресу `http://localhost:8080`
 
 ## API Endpoints
-
+```
 - `POST /register`: Регистрация нового пользователя
 curl -X POST http://localhost:8080/register -H "Content-Type: application/json" -d '{
   "username": "admin",
   "password": "admin"
 }'
+```
+```
 - `POST /login`: Вход пользователя и получение JWT токена
 curl -X POST http://localhost:8080/login -H "Content-Type: application/json" -d '{
   "username": "admin",
   "password": "admin"
 }' 
+```
+```
 - `POST /notes`: Создание новой заметки (требуется аутентификация)
 curl -X POST http://localhost:8080/notes -H "Authorization: Bearer your-jwt-token" -H "Content-Type: application/json" -d '{
   "title": "My First Note",
   "content": "This is the content of my first note."
 }'
+```
+```
 
 - `GET /notes`: Получение списка заметок пользователя (требуется аутентификация)
 curl -X GET http://localhost:8080/notes -H "Authorization: Bearer your-jwt-token"
-
+```
 ## Разработка
 
 - Для сборки приложения: `make build`
