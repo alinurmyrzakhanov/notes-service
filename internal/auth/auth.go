@@ -37,6 +37,12 @@ type LoginRequest struct {
 	Password string `json:"password"`
 }
 
+type contextKey string
+
+const (
+	userIDKey contextKey = "user_id"
+)
+
 func (s *AuthServiceImpl) Register(w http.ResponseWriter, r *http.Request) {
 	var req RegisterRequest
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
@@ -113,7 +119,7 @@ func (s *AuthServiceImpl) Authenticate(next http.Handler) http.Handler {
 			return
 		}
 
-		ctx := context.WithValue(r.Context(), "user_id", int64(userID))
+		ctx := context.WithValue(r.Context(), userIDKey, int64(userID))
 		next.ServeHTTP(w, r.WithContext(ctx))
 	})
 }
